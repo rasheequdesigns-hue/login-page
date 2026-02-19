@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', async ()=>{
   let settings = Store.get('admin_settings', {siteName:'ShopKaro',accent:'#B7FF00',shipping:49,tax:18,cod:true,razorpayKey:''});
 
   renderAll();
+  loadServerAnalytics();
 
   document.getElementById('addProductBtn')?.addEventListener('click', ()=>{
     if(!can('products:write')) return alert('No permission');
@@ -146,6 +147,19 @@ document.addEventListener('DOMContentLoaded', async ()=>{
     const set=(id,v)=>{const el=document.getElementById(id); if(el!=null) el.value=v;};
     set('setSiteName',s.siteName); set('setAccent',s.accent); set('setShip',s.shipping); set('setTax',s.tax);
     const cod=document.getElementById('setCod'); if(cod) cod.checked=!!s.cod;
+  }
+
+  async function loadServerAnalytics(){
+    try {
+      const token = (Auth.session()||{}).token;
+      const res = await fetch('/api/admin/analytics', { headers: { Authorization: `Bearer ${token}` } });
+      if(!res.ok) return;
+      const a = await res.json();
+      set('kpi-sales', `₹${Number(a.revenue||0).toLocaleString()}`);
+      set('kpi-orders', a.totalOrders||0);
+      set('kpi-products', a.totalProducts||0);
+      set('kpi-users', a.totalUsers||0);
+    } catch {}
   }
 
   const out=document.getElementById('logout'); if(out) out.onclick=()=>{Auth.logout();location.href='/admin/login.html'};

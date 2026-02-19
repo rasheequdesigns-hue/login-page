@@ -24,11 +24,12 @@ module.exports = async (req, res) => {
     return res.status(401).json({ error: 'Invalid credentials' });
   }
 
+  const role = process.env.ADMIN_ROLE || 'super_admin';
   const token = sign({
     email,
-    role: 'super_admin',
+    role,
     exp: Date.now() + 1000 * 60 * 60 * 12
   });
 
-  return res.status(200).json({ token, admin: { email, role: 'super_admin' } });
+  return res.status(200).json({ token, admin: { email, role } });
 };
