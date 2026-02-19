@@ -1,20 +1,20 @@
-:root {
-  --bg-primary:#000000;
+:root{
+  --bg-primary:#000;
   --bg-secondary:#0A0A0A;
-  --glass-bg:rgba(20,20,20,0.6);
-  --surface:#141414;
-  --border:rgba(183,255,0,0.2);
-  --text-primary:#FFFFFF;
-  --text-secondary:#A0A0A0;
+  --bg-card:#111;
+  --bg-glass:rgba(20,20,20,.65);
   --accent:#B7FF00;
   --accent-hover:#D9FF3F;
-  --soft-glow:rgba(183,255,0,0.4);
+  --text-primary:#fff;
+  --text-secondary:#A0A0A0;
+  --border:#1A1A1A;
+  --border-accent:rgba(183,255,0,.15);
 
-  --space-1:8px; --space-2:16px; --space-3:24px; --space-4:32px;
-  --space-5:48px; --space-6:64px; --space-7:96px;
-
-  --radius-sm:12px;
-  --radius-md:16px;
-  --radius-lg:24px;
-  --transition:all .3s cubic-bezier(.4,0,.2,1);
+  --space-1:8px;--space-2:16px;--space-3:24px;--space-4:32px;--space-5:40px;--space-6:60px;--space-7:80px;
+  --radius-sm:12px;--radius-md:16px;--radius-lg:20px;
+  --shadow-soft:0 8px 30px rgba(0,0,0,.25);
+  --transition:.3s ease;
+  --container:1200px;
 }
+@media (max-width:1024px){:root{--space-7:60px;}}
+@media (max-width:680px){:root{--space-7:40px;}}

@@ -1,49 +1,16 @@
-<!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Admin Dashboard</title><link rel='stylesheet' href='/src/styles/base.css'><link rel='stylesheet' href='/src/styles/components.css'><link rel='stylesheet' href='/admin/styles/admin.css'><script src='https://cdn.jsdelivr.net/npm/chart.js'></script></head><body>
+<!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>ShopKaro Admin</title><link rel='stylesheet' href='/src/styles/base.css'><link rel='stylesheet' href='/src/styles/components.css'><link rel='stylesheet' href='/admin/styles/admin.css'><script src='https://cdn.jsdelivr.net/npm/chart.js'></script></head><body>
 <div class='admin-layout'>
-<aside class='sidebar'><h3 class='brand'>ShopKaro Admin</h3><ul><li><a class='active' data-tab='dashboard' href='#'>Dashboard</a></li><li><a data-tab='products' href='#'>Products</a></li><li><a data-tab='orders' href='#'>Orders</a></li><li><a data-tab='users' href='#'>Users</a></li><li><a data-tab='analytics' href='#'>Analytics</a></li><li><a data-tab='marketing' href='#'>Marketing</a></li><li><a data-tab='settings' href='#'>Settings</a></li><li><a id='logout' href='#'>Logout</a></li></ul></aside>
+<aside class='sidebar'><h3 class='brand'>ShopKaro Admin</h3><a class='active' data-tab='dashboard' href='#'>Dashboard</a><a data-tab='products' href='#'>Products</a><a data-tab='orders' href='#'>Orders</a><a data-tab='users' href='#'>Users</a><a data-tab='analytics' href='#'>Analytics</a><a data-tab='settings' href='#'>Settings</a><a id='logout' href='#'>Logout</a></aside>
 <main class='main'>
-<div class='topbar'><strong data-title>Dashboard Overview</strong><input id='adminSearch' class='input' style='max-width:280px' placeholder='Search orders, users'><span>🔔</span></div>
-<section class='kpis' data-panel='dashboard'><div class='kpi'><p>Total Revenue</p><h3 id='kpi-sales'>₹0</h3></div><div class='kpi'><p>Total Orders</p><h3 id='kpi-orders'>0</h3></div><div class='kpi'><p>Total Products</p><h3 id='kpi-products'>0</h3></div><div class='kpi'><p>Total Users</p><h3 id='kpi-users'>0</h3></div></section>
-<section class='panel' data-panel='dashboard'><div class='grid grid-2'><div class='card'><h3>Sales Graph</h3><canvas id='salesChart'></canvas></div><div class='card'><h3>Orders Graph</h3><canvas id='orderChart'></canvas></div></div></section>
-
-<section class='panel' data-panel='products' hidden>
-  <div class='section-title'><h3>Products Management</h3><button class='btn btn-primary' id='addProductBtn'>Add Product</button></div>
-  <table class='table'><thead><tr><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th>COD</th><th>Actions</th></tr></thead><tbody id='admin-products'></tbody></table>
-</section>
-
-<section class='panel' data-panel='orders' hidden>
-  <div class='section-title'><h3>Orders Management</h3><button class='btn btn-secondary' id='exportOrdersBtn'>Export CSV</button></div>
-  <table class='table'><thead><tr><th>Order</th><th>User</th><th>Total</th><th>Status</th><th>Tracking</th><th>Actions</th></tr></thead><tbody id='admin-orders'></tbody></table>
-</section>
-
-<section class='panel' data-panel='users' hidden><h3>Users</h3><table class='table'><thead><tr><th>Name</th><th>Email</th><th>Status</th><th>Actions</th></tr></thead><tbody id='admin-users'></tbody></table></section>
-
-<section class='panel' data-panel='analytics' hidden><h3>Analytics</h3><div class='card'>Conversion and funnel widgets in next phase.</div></section>
-
-<section class='panel' data-panel='marketing' hidden>
-  <h3>Marketing Tools</h3>
-  <div class='card'>
-    <form class='form' id='couponForm'>
-      <input class='input' id='couponCode' placeholder='Coupon code (e.g., NEW10)' required>
-      <input class='input' id='couponValue' type='number' placeholder='Discount value' required>
-      <select class='input' id='couponType'><option value='percent'>Percent</option><option value='fixed'>Fixed ₹</option></select>
-      <button class='btn btn-primary'>Create Coupon</button>
-    </form>
-    <div id='couponList' style='margin-top:12px'></div>
-  </div>
-</section>
-
-<section class='panel' data-panel='settings' hidden>
-  <h3>Website Settings</h3>
-  <div class='card'><form class='form' id='settingsForm'>
-    <input class='input' id='setSiteName' placeholder='Website Name'>
-    <input class='input' id='setAccent' placeholder='Accent Color (hex)'>
-    <input class='input' id='setShip' type='number' placeholder='Shipping Charge'>
-    <input class='input' id='setTax' type='number' placeholder='Tax %'>
-    <label><input type='checkbox' id='setCod'> COD Enabled</label>
-    <button class='btn btn-primary'>Save Settings</button>
-  </form></div>
-</section>
+<div class='topbar'><strong data-title>Dashboard</strong><input class='input' id='adminSearch' placeholder='Search'></div>
+<section class='kpis' data-panel='dashboard'><div class='kpi'><p>Total Sales</p><h3 id='kpi-sales'>₹0</h3></div><div class='kpi'><p>Total Orders</p><h3 id='kpi-orders'>0</h3></div><div class='kpi'><p>Total Products</p><h3 id='kpi-products'>0</h3></div><div class='kpi'><p>Revenue</p><h3 id='kpi-users'>0</h3></div></section>
+<section class='panel' data-panel='dashboard'><div class='grid grid-2'><div class='card'><h3>Sales Trend</h3><canvas id='salesChart'></canvas></div><div class='card'><h3>Recent Orders</h3><div class='table-wrap'><table class='table'><thead><tr><th>Order ID</th><th>Customer</th><th>Total</th><th>Status</th></tr></thead><tbody id='recentOrders'></tbody></table></div></div></div></section>
+<section class='panel' data-panel='products' hidden><div class='section-title'><h3>Products Management</h3><button class='btn btn-primary' id='addProductBtn'>Add Product</button></div><div class='table-wrap'><table class='table'><thead><tr><th>Image</th><th>Name</th><th>Price</th><th>Stock</th><th>Status</th><th>Edit</th><th>Delete</th></tr></thead><tbody id='admin-products'></tbody></table></div></section>
+<section class='panel' data-panel='orders' hidden><div class='section-title'><h3>Orders Management</h3><button class='btn btn-dark' id='exportOrdersBtn'>Export CSV</button></div><div class='table-wrap'><table class='table'><thead><tr><th>Order ID</th><th>Customer</th><th>Total</th><th>Status</th><th>Update Status</th><th>View Details</th></tr></thead><tbody id='admin-orders'></tbody></table></div></section>
+<section class='panel' data-panel='users' hidden><h3>Users</h3><div class='table-wrap'><table class='table'><thead><tr><th>Name</th><th>Email</th><th>Status</th><th>Actions</th></tr></thead><tbody id='admin-users'></tbody></table></div></section>
+<section class='panel' data-panel='analytics' hidden><h3>Analytics</h3><p>Server KPI sync active.</p></section>
+<section class='panel' data-panel='settings' hidden><h3>Settings</h3><form class='form' id='settingsForm'><input class='input' id='setSiteName' placeholder='Website Info / Name'><input class='input' id='setShip' type='number' placeholder='Shipping Charges'><input class='input' id='setTax' type='number' placeholder='Tax Settings %'><input class='input' id='setRzp' placeholder='Payment Keys (Razorpay key id)'><input class='input' id='setAccent' placeholder='Theme Accent Control'><label><input type='checkbox' id='setCod'> COD Enabled</label><button class='btn btn-primary'>Save Settings</button></form></section>
 </main></div>
-<script src='/src/utils/store.js'></script><script src='/src/utils/auth.js'></script><script src='/src/utils/data.js'></script><script src='/admin/components/admin.js'></script><script>new Chart(document.getElementById('salesChart'),{type:'line',data:{labels:['Mon','Tue','Wed','Thu','Fri'],datasets:[{label:'Sales',data:[12,19,9,16,24],borderColor:'#B7FF00'}]},options:{plugins:{legend:{labels:{color:'#A0A0A0'}}},scales:{x:{ticks:{color:'#A0A0A0'},grid:{color:'rgba(183,255,0,.08)'}},y:{ticks:{color:'#A0A0A0'},grid:{color:'rgba(183,255,0,.08)'}}}}});new Chart(document.getElementById('orderChart'),{type:'bar',data:{labels:['Mon','Tue','Wed','Thu','Fri'],datasets:[{label:'Orders',data:[5,8,4,7,11],backgroundColor:'rgba(183,255,0,.45)',borderColor:'#B7FF00'}]},options:{plugins:{legend:{labels:{color:'#A0A0A0'}}},scales:{x:{ticks:{color:'#A0A0A0'},grid:{color:'rgba(183,255,0,.08)'}},y:{ticks:{color:'#A0A0A0'},grid:{color:'rgba(183,255,0,.08)'}}}}});</script>
+<script src='/src/utils/store.js'></script><script src='/src/utils/auth.js'></script><script src='/src/utils/data.js'></script><script src='/admin/components/admin.js'></script>
+<script>new Chart(document.getElementById('salesChart'),{type:'line',data:{labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],datasets:[{label:'Sales',data:[12,19,9,16,24,15,27],borderColor:'#B7FF00'}]},options:{plugins:{legend:{labels:{color:'#A0A0A0'}}},scales:{x:{ticks:{color:'#A0A0A0'}},y:{ticks:{color:'#A0A0A0'}}}}});</script>
 </body></html>
